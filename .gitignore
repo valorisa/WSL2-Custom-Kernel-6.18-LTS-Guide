@@ -1,0 +1,5 @@
+WSL2-Linux-Kernel/
+*.img
+*.vhdx
+.vscode/
+.DS_Store
