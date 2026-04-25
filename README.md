@@ -30,7 +30,7 @@ Après : 6.18.20.3+ (2026) - Support jusqu'en 2027 ✅
 🧠 RAM recommandée : 8Go+
 ```
 
-## 🚀 Guide pas à pas (REPRODUISIBLE)
+## 🚀 Guide pas à pas (REPRODUCTIBLE)
 
 ### 1. Préparation Ubuntu (WSL2)
 
