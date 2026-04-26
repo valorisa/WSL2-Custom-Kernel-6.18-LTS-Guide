@@ -51,7 +51,7 @@ wsl --update                    # Noyau à jour
 
 **Vérification** :
 ```powershell
-wsl --list --verbose  # Doit montrer Ubuntu-25.10 (WSL2), sinon, installer une distro Linux de votre choix
+wsl --list --verbose  # Doit montrer Ubuntu-25.10 (WSL2). Sinon, installer une distro Linux de votre choix
 ```
 
 **Problème courant** : Virtualisation désactivée → Activez dans BIOS/UEFI ("SVM" AMD / "VT-x" Intel).
