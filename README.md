@@ -34,7 +34,7 @@ wsl --version
 ```
 
 - **Si erreur "wsl introuvable"** → Installez WSL2.
-- **Méthode officielle (10 min)** :[web:1][web:9][web:12]
+- **Méthode officielle (10 min)** :
 
 ```powershell
 # Terminal Admin (PowerShell ou CMD)
@@ -54,12 +54,12 @@ wsl --update                    # Noyau à jour
 wsl --list --verbose  # Doit montrer Ubuntu-25.10 (WSL2)
 ```
 
-**Problème courant** : Virtualisation désactivée → Activez dans BIOS/UEFI ("SVM" AMD / "VT-x" Intel).[web:9]
+**Problème courant** : Virtualisation désactivée → Activez dans BIOS/UEFI ("SVM" AMD / "VT-x" Intel).
 
 ### 2. Installer PowerShell 7.6.1 (Non Natif !)
 
-**PowerShell 5.1** est **préinstallé** sur Windows 11 (tapez `powershell`).[web:3]
-**PowerShell 7.6.1** (Core) **doit être installé manuellement** car **cross-platform** et moderne.[web:17]
+**PowerShell 5.1** est **préinstallé** sur Windows 11 (tapez `powershell`).
+**PowerShell 7.6.1** (Core) **doit être installé manuellement** car **cross-platform** et moderne.
 
 #### Méthode Recommandée : Winget (1 ligne)
 ```powershell
@@ -68,10 +68,10 @@ winget install --id Microsoft.PowerShell --source winget
 ```
 
 #### Alternative : MSI Officiel
-1. Téléchargez `PowerShell-7.6.1-win-x64.msi` depuis [GitHub PowerShell](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.1).[web:17]
+1. Téléchargez `PowerShell-7.6.1-win-x64.msi` depuis [GitHub PowerShell](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.1).
 2. Exécutez (admin) : `msiexec.exe /package PowerShell-7.6.1-win-x64.msi /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_PATH=1`
 
-**Lancement** : Tapez `pwsh` (pas `powershell`).[web:3][web:17]
+**Lancement** : Tapez `pwsh` (pas `powershell`).
 
 **Vérification** :
 ```powershell
@@ -81,14 +81,14 @@ $PSVersionTable  # Détails complets
 
 #### Différences PowerShell 5.1 vs 7.6.1 (Explication Simple)
 | Aspect | PowerShell 5.1 (Natif Windows) | PowerShell 7.6.1 (Core) |
-|--------|--------------------------------|-------------------------|
-| **Plateforme** | Windows seulement | Windows/Linux/macOS[web:3][web:7] |
-| **Performance** | Plus lente (57x moins sur gros datasets)[web:15] | **57x plus rapide** sur pipelines lourds |
-| **Fonctionnalités** | Base | **Nouvelles** : `ForEach-Object -Parallel`, SSH natif, ternaire (`? :`), conteneurs Docker[web:3] |
-| **Coexistence** | `powershell.exe` | `pwsh.exe` **côte-à-côte** (pas de conflit)[web:3] |
+| ------ | ------------------------------ | ----------------------- |
+| **Plateforme** | Windows seulement | Windows/Linux/macOS |
+| **Performance** | Plus lente (57x moins sur gros datasets) | **57x plus rapide** sur pipelines lourds |
+| **Fonctionnalités** | Base | **Nouvelles** : `ForEach-Object -Parallel`, SSH natif, ternaire (`? :`), conteneurs Docker |
+| **Coexistence** | `powershell.exe` | `pwsh.exe` **côte-à-côte** (pas de conflit) |
 | **Utilisation ici** | OK pour basique | **Requis** pour WSL avancé/performant |
 
-**Pourquoi 7.6.1 ?** Meilleure compatibilité WSL2, scripts cross-platform, futur-proof.[web:3]
+**Pourquoi 7.6.1 ?** Meilleure compatibilité WSL2, scripts cross-platform, futur-proof.
 
 ### 3. Vérifications Finales Avant Guide
 ```powershell
