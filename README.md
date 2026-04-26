@@ -8,6 +8,8 @@
 **Guide COMPLET et RIGOUREUX : Compilation du noyau Linux 6.18 LTS pour WSL2 sous Windows 11 Enterprise (PowerShell 7.6.1)**
 
 > **Créé le 25 avril 2026** - Expérience réelle avec **TOUTES les galères et solutions**
+>
+> **Mis à jour le 26 avril 2026**
 
 ## 🛠️ Préparation Complète de l'Environnement
 
