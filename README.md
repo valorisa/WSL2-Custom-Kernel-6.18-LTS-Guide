@@ -9,7 +9,7 @@
 
 > **Créé le 25 avril 2026** - Expérience réelle avec **TOUTES les galères et solutions**
 >
-> **Mis à jour le 26 avril 2026**
+> **Mis à jour le 26 avril 2026** - Ajout de **Préparation Complète de l'Environnement**
 
 ## 🛠️ Préparation Complète de l'Environnement
 
@@ -18,7 +18,7 @@ Cette section **préparatoire essentielle** détaille **TOUS** les prérequis po
 - **Ubuntu 25.10 (WSL2)** : Pour la compilation du noyau (étapes 1-5 : préparation, clonage, make).
 
 | Environnement | Parties concernées | Commandes exécutées | Prérequis |
-|---------------|--------------------|---------------------|-----------|
+| ------------- | ------------------ | ------------------- | --------- |
 | **PowerShell 7.6.1 (Windows)** | Étapes 6,7,8 + Activation finale | `wsl --shutdown`, édition `.wslconfig` | Installation manuelle (voir ci-dessous) |
 | **Ubuntu 25.10 (WSL2)** | Étapes 1-5 | `apt install`, `git clone`, `make` | WSL installé + distro Ubuntu |
 
