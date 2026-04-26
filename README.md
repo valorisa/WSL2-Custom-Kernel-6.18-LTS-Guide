@@ -69,7 +69,7 @@ winget install --id Microsoft.PowerShell --source winget
 
 #### Alternative : MSI Officiel
 1. Téléchargez `PowerShell-7.6.1-win-x64.msi` depuis [GitHub PowerShell](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.1).
-2. Exécutez (admin) : `msiexec.exe /package PowerShell-7.6.1-win-x64.msi /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_PATH=1`
+2. Exécutez (avec les driots admin) : `msiexec.exe /package PowerShell-7.6.1-win-x64.msi /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_PATH=1`
 
 **Lancement** : Tapez `pwsh` (pas `powershell`).
 
