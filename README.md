@@ -45,8 +45,8 @@ wsl --install
 **Redémarrez Windows**, puis :
 ```powershell
 wsl --install -d Ubuntu-25.10  # Si version spécifique souhaitée
-wsl --set-default-version 2     # Force WSL2
-wsl --update                    # Noyau à jour
+wsl --set-default-version 2    # Force WSL2
+wsl --update                   # Noyau à jour
 ```
 
 **Vérification** :
