@@ -202,11 +202,16 @@ uname -r
 
 ### 9. Résumé (MAJ le 10 août 2026)
 
-```text
+```bash
 ###############################################################################
 # MIGRATION NOYAU WSL2 CUSTOM — Procédure complète
 # Environnements : [UBUNTU] = terminal Ubuntu (WSL) | [POWERSHELL] = PowerShell Windows
 # Dernière validation : 6.18.40.1, build réussi en ~20min sur 4 cœurs
+#
+# NOTE : <WIN_USER> désigne ton nom d'utilisateur Windows (ex: ton_username).
+#        Vu depuis Ubuntu    : /mnt/c/Users/<WIN_USER>/...
+#        Vu depuis PowerShell : C:\Users\<WIN_USER>\...
+#        C'est le MÊME compte, juste deux syntaxes de chemin différentes.
 ###############################################################################
 
 # ============================================================
@@ -260,22 +265,24 @@ tmux attach -t wsl-kernel-build
 
 # ============================================================
 # [UBUNTU] 5. Vérifier le build et copier le résultat vers Windows
+# Remplacer <WIN_USER> par ton nom d'utilisateur Windows
 # ============================================================
 ls -la arch/x86/boot/bzImage         # doit exister, ~15 Mo
 grep -i "error:" build.log           # doit être vide
 
-mkdir -p /mnt/c/Users/bbrod/wsl-kernel
-cp arch/x86/boot/bzImage "/mnt/c/Users/bbrod/wsl-kernel/bzImage-${VERSION}"
-ls -la /mnt/c/Users/bbrod/wsl-kernel/
+mkdir -p /mnt/c/Users/<WIN_USER>/wsl-kernel
+cp arch/x86/boot/bzImage "/mnt/c/Users/<WIN_USER>/wsl-kernel/bzImage-${VERSION}"
+ls -la /mnt/c/Users/<WIN_USER>/wsl-kernel/
 
 # ============================================================
 # [POWERSHELL] 6. Configurer .wslconfig
+# Remplacer <WIN_USER> par ton nom d'utilisateur Windows
 # ============================================================
-# notepad C:\Users\bbrod\.wslconfig
+# notepad C:\Users\<WIN_USER>\.wslconfig
 #
 # Contenu (adapter le nom de fichier à chaque version) :
 # [wsl2]
-# kernel=C:\\Users\\bbrod\\wsl-kernel\\bzImage-6.18.40.1
+# kernel=C:\\Users\\<WIN_USER>\\wsl-kernel\\bzImage-6.18.40.1
 
 # ============================================================
 # [POWERSHELL] 7. Redémarrer WSL
@@ -298,7 +305,7 @@ tmux kill-session -t wsl-kernel-build 2>/dev/null || true
 # ============================================================
 # [POWERSHELL] 10. ROLLBACK — si problème au démarrage après changement de noyau
 # ============================================================
-# notepad C:\Users\bbrod\.wslconfig
+# notepad C:\Users\<WIN_USER>\.wslconfig
 # -> supprimer/commenter la ligne "kernel="
 # wsl --shutdown
 # wsl
