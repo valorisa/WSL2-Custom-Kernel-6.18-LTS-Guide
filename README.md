@@ -200,6 +200,112 @@ uname -r
 # → 6.18.20.3-microsoft-standard-WSL2+  🎉
 ```
 
+### 9. Résumé
+
+```text
+###############################################################################
+# MIGRATION NOYAU WSL2 CUSTOM — Procédure complète
+# Environnements : [UBUNTU] = terminal Ubuntu (WSL) | [POWERSHELL] = PowerShell Windows
+# Dernière validation : 6.18.40.1, build réussi en ~20min sur 4 cœurs
+###############################################################################
+
+# ============================================================
+# [UBUNTU] 1. Préparer l'environnement (une seule fois, sauf si dépendances manquantes)
+# ============================================================
+cd ~
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y build-essential flex bison libssl-dev libelf-dev \
+  bc dwarves python3 python3-pip pahole cpio rsync kmod tmux
+df -h ~        # vérifier l'espace dispo (15-20 Go nécessaires)
+nproc          # nombre de cœurs disponibles pour -j
+
+# ============================================================
+# [UBUNTU] 2. Cloner le tag kernel WSL voulu
+# Remplacer VERSION par le tag exact (ex: 6.18.45.1)
+# Vérifier le nom exact du tag sur : https://github.com/microsoft/WSL2-Linux-Kernel/releases
+# ============================================================
+VERSION="6.18.40.1"   # <-- à adapter à chaque nouvelle version
+cd ~/Projets
+git clone --depth 1 --branch "linux-msft-wsl-${VERSION}" \
+  https://github.com/microsoft/WSL2-Linux-Kernel.git "wsl-kernel-${VERSION}"
+cd "wsl-kernel-${VERSION}"
+
+# Vérification de cohérence (optionnelle mais recommandée)
+head -5 Makefile   # doit afficher VERSION/PATCHLEVEL/SUBLEVEL correspondant au tag
+
+# ============================================================
+# [UBUNTU] 3. Config officielle WSL + resynchronisation
+# ============================================================
+cp Microsoft/config-wsl .config
+make olddefconfig
+head -3 .config    # doit confirmer la bonne version dans le commentaire généré
+
+# ============================================================
+# [UBUNTU] 4. Compilation sous tmux (résiste aux déconnexions SSH/terminal)
+# ============================================================
+tmux new -s wsl-kernel-build
+# --- dans la session tmux ---
+cd ~/Projets/"wsl-kernel-${VERSION}"
+time make -j$(nproc) 2>&1 | tee build.log
+# --- une fois lancé, détacher avec : Ctrl+b puis d ---
+
+# Pour suivre la progression sans se rattacher :
+tmux capture-pane -t wsl-kernel-build -p | tail -30
+
+# Pour se rattacher pleinement :
+tmux attach -t wsl-kernel-build
+
+# Si la session tmux est perdue (crash VM), simplement relancer make :
+# make est incrémental, il reprend où il s'est arrêté.
+
+# ============================================================
+# [UBUNTU] 5. Vérifier le build et copier le résultat vers Windows
+# ============================================================
+ls -la arch/x86/boot/bzImage         # doit exister, ~15 Mo
+grep -i "error:" build.log           # doit être vide
+
+mkdir -p /mnt/c/Users/bbrod/wsl-kernel
+cp arch/x86/boot/bzImage "/mnt/c/Users/bbrod/wsl-kernel/bzImage-${VERSION}"
+ls -la /mnt/c/Users/bbrod/wsl-kernel/
+
+# ============================================================
+# [POWERSHELL] 6. Configurer .wslconfig
+# ============================================================
+# notepad C:\Users\bbrod\.wslconfig
+#
+# Contenu (adapter le nom de fichier à chaque version) :
+# [wsl2]
+# kernel=C:\\Users\\bbrod\\wsl-kernel\\bzImage-6.18.40.1
+
+# ============================================================
+# [POWERSHELL] 7. Redémarrer WSL
+# ============================================================
+# wsl --shutdown
+# wsl
+
+# ============================================================
+# [UBUNTU] 8. Vérifier la version active
+# ============================================================
+uname -r    # attendu : <VERSION>-microsoft-standard-WSL2+
+
+# ============================================================
+# [UBUNTU] 9. Nettoyage du dossier de build (garder le bzImage copié)
+# ============================================================
+cd ~/Projets
+rm -rf "wsl-kernel-${VERSION}"
+tmux kill-session -t wsl-kernel-build 2>/dev/null || true
+
+# ============================================================
+# [POWERSHELL] ROLLBACK — si problème au démarrage après changement de noyau
+# ============================================================
+# notepad C:\Users\bbrod\.wslconfig
+# -> supprimer/commenter la ligne "kernel="
+# wsl --shutdown
+# wsl
+# (retour au noyau géré par Microsoft, ex: 6.18.33.2)
+###############################################################################
+```
+
 ## 🐛 GALÈRES & SOLUTIONS réelles
 
 | Problème | Cause | Solution |
