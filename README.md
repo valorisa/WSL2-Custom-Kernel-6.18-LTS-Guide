@@ -5,11 +5,11 @@
 [![PowerShell](https://img.shields.io/badge/PowerShell-7.6.1-blue.svg)]()
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-25.10-orange.svg)]()
 
-**Guide COMPLET et RIGOUREUX : Compilation du noyau Linux 6.18 LTS pour WSL2 sous Windows 11 Enterprise (PowerShell 7.6.1)**
+**Guide COMPLET et RIGOUREUX : Compilation du noyau Linux 6.18 LTS pour WSL2 sous Windows 11 Enterprise (PowerShell 7.6+)**
 
 > **Créé le 25 avril 2026** - Expérience réelle avec **TOUTES les galères et solutions**
 >
-> **Mis à jour le 26 avril 2026** - Ajout de **Préparation Complète de l'Environnement**
+> **Mis à jour le 26 avril 2026 et le 10 août 2026** - Ajout de **Préparation Complète de l'Environnement**
 
 ## 🛠️ Préparation Complète de l'Environnement
 
