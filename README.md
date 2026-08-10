@@ -296,7 +296,7 @@ rm -rf "wsl-kernel-${VERSION}"
 tmux kill-session -t wsl-kernel-build 2>/dev/null || true
 
 # ============================================================
-# [POWERSHELL] ROLLBACK — si problème au démarrage après changement de noyau
+# [POWERSHELL] 10. ROLLBACK — si problème au démarrage après changement de noyau
 # ============================================================
 # notepad C:\Users\bbrod\.wslconfig
 # -> supprimer/commenter la ligne "kernel="
