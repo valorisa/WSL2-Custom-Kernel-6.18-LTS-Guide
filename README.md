@@ -361,8 +361,9 @@ Licence CC-BY-SA 4.0
 
 ## 🙌 Crédits
 
-**Expérience réelle du 25 avril 2026** :
+**Expérience réelle du 25 avril 2026 (MAJ le 10 août 2026)** :
 - Compilation réussie `6.18.20.3-microsoft-standard-WSL2+`
+- Compilation réussie `6.18.40.1-microsoft-standard-WSL2+`
 - Toutes galères incluses et résolues
 - Guide 100% reproductible
 
