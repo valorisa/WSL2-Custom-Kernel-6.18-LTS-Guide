@@ -14,8 +14,8 @@
 ## 🛠️ Préparation Complète de l'Environnement
 
 Cette section **préparatoire essentielle** détaille **TOUS** les prérequis pour éviter les échecs courants. Le guide utilise **deux environnements distincts** :
-- **Windows/PowerShell 7.6.1** : Pour les commandes de gestion WSL (étapes 6-8 : déploiement, `.wslconfig`, activation).
-- **Ubuntu 25.10 (WSL2)** : Pour la compilation du noyau (étapes 1-5 : préparation, clonage, make).
+- **Windows/PowerShell 7.6+** : Pour les commandes de gestion WSL (étapes 6-8 : déploiement, `.wslconfig`, activation).
+- **Ubuntu 25.10/26.04 (WSL2)** : Pour la compilation du noyau (étapes 1-5 : préparation, clonage, make).
 
 | Environnement | Parties concernées | Commandes exécutées | Prérequis |
 | ------------- | ------------------ | ------------------- | --------- |
