@@ -19,7 +19,7 @@ Cette section **préparatoire essentielle** détaille **TOUS** les prérequis po
 
 | Environnement | Parties concernées | Commandes exécutées | Prérequis |
 | ------------- | ------------------ | ------------------- | --------- |
-| **PowerShell 7.6.1 (Windows)** | Étapes 6,7,8 + Activation finale | `wsl --shutdown`, édition `.wslconfig` | Installation manuelle (voir ci-dessous) |
+| **PowerShell 7.6+ (Windows)** | Étapes 6,7,8 + Activation finale | `wsl --shutdown`, édition `.wslconfig` | Installation manuelle (voir ci-dessous) |
 | **Ubuntu 25.10 (WSL2)** | Étapes 1-5 | `apt install`, `git clone`, `make` | WSL installé + distro Ubuntu |
 
 **⚠️ Sans cette préparation, échecs garantis** : "wsl introuvable", "pwsh.exe manquant", compilation impossible.
@@ -29,7 +29,7 @@ Cette section **préparatoire essentielle** détaille **TOUS** les prérequis po
 WSL2 n'est **pas toujours activé** sur Windows 11 Enterprise. Vérifiez d'abord :
 
 ```powershell
-# Dans PowerShell 5.1 ou 7 (admin)
+# Dans PowerShell 5.1 ou 7.6+ (admin)
 wsl --version
 ```
 
@@ -56,10 +56,10 @@ wsl --list --verbose  # Doit montrer Ubuntu-25.10 (WSL2). Sinon, installer une d
 
 **Problème courant** : Virtualisation désactivée → Activez dans BIOS/UEFI ("SVM" AMD / "VT-x" Intel).
 
-### 2. Installer PowerShell 7.6.1 (Non Natif !)
+### 2. Installer PowerShell 7.6+ (Non Natif !)
 
 **PowerShell 5.1** est **préinstallé** sur Windows 11 (tapez `powershell`).
-**PowerShell 7.6.1** (Core) **doit être installé manuellement** car **cross-platform** et moderne.
+**PowerShell 7.6.4** (Core) **doit être installé manuellement** car **cross-platform** et moderne.
 
 #### Méthode Recommandée : Winget (1 ligne)
 ```powershell
@@ -68,19 +68,19 @@ winget install --id Microsoft.PowerShell --source winget
 ```
 
 #### Alternative : MSI Officiel
-1. Téléchargez `PowerShell-7.6.1-win-x64.msi` depuis [GitHub PowerShell](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.1).
-2. Exécutez (avec les droits admin) : `msiexec.exe /package PowerShell-7.6.1-win-x64.msi /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_PATH=1`
+1. Téléchargez `PowerShell-7.6.4-win-x64.msi` depuis [GitHub PowerShell](https://github.com/PowerShell/PowerShell/releases/tag/v7.6.4).
+2. Exécutez (avec les droits admin) : `msiexec.exe /package PowerShell-7.6.4-win-x64.msi /quiet ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_PATH=1`
 
 **Lancement** : Tapez `pwsh` (pas `powershell`).
 
 **Vérification** :
 ```powershell
-pwsh -v  # → 7.6.1
+pwsh -v  # → 7.6.4
 $PSVersionTable  # Détails complets
 ```
 
-#### Différences PowerShell 5.1 vs 7.6.1 (Explication Simple)
-| Aspect | PowerShell 5.1 (Natif Windows) | PowerShell 7.6.1 (Core) |
+#### Différences PowerShell 5.1 vs 7.6.4 (Explication Simple)
+| Aspect | PowerShell 5.1 (Natif Windows) | PowerShell 7.6.4 (Core) |
 | ------ | ------------------------------ | ----------------------- |
 | **Plateforme** | Windows seulement | Windows/Linux/macOS |
 | **Performance** | Plus lente (57x moins sur gros datasets) | **57x plus rapide** sur pipelines lourds |
@@ -88,14 +88,14 @@ $PSVersionTable  # Détails complets
 | **Coexistence** | `powershell.exe` | `pwsh.exe` **côte-à-côte** (pas de conflit) |
 | **Utilisation ici** | OK pour basique | **Requis** pour WSL avancé/performant |
 
-**Pourquoi 7.6.1 ?** Meilleure compatibilité WSL2, scripts cross-platform, futur-proof.
+**Pourquoi 7.6.4 ?** Meilleure compatibilité WSL2, scripts cross-platform, futur-proof.
 
 ### 3. Vérifications Finales Avant Guide
 ```powershell
 # Dans pwsh (admin)
 wsl --version              # OK
 wsl -l -v                  # Ubuntu prêt
-pwsh -v                    # 7.6.1
+pwsh -v                    # 7.6.4
 ```
 
 **Espace disque** : 6Go+ libre (C:\ + WSL VHDX).
@@ -117,7 +117,7 @@ Après : 6.18.20.3+ (2026) - Support jusqu'en 2027 ✅
 
 ```text
 💻 Windows 11 Enterprise (10.0.26200.8246)
-⚡ PowerShell Core 7.6.1
+⚡ PowerShell Core 7.6.4
 🐧 Ubuntu-25.10 (WSL2)
 🐧 Oracle Linux 9.5 (WSL2)
 💾 Espace requis : 6Go+ 
