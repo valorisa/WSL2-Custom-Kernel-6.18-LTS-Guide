@@ -1,40 +1,56 @@
 # Scripts de maintenance du dépôt
 
-Ce dossier contient des utilitaires pour maintenir la qualité de la documentation du dépôt Claude-Skills.
+Ce dossier contient des utilitaires destinés à maintenir la qualité de la documentation Markdown d’un dépôt GitHub.
 
-## fix_markdownlint.py
+## `fix_markdownlint.py`
 
-### À quoi ça sert ?
+### Objectif
 
-Lors de l'importation de nouvelles skills depuis des dépôts externes, leurs fichiers *.md contiennent souvent des erreurs de formatage qui font échouer le pipeline CI (markdownlint-cli2).
+Lors de l’ajout ou de la modification de fichiers Markdown, certaines erreurs de formatage peuvent faire échouer les contrôles de qualité ou le pipeline d’intégration continue utilisant `markdownlint-cli2`.
 
-Bien que markdownlint possède une option --fix, celle-ci ne corrige qu'une partie des règles. Ce script Python corrige automatiquement les règles non auto-fixables les plus courantes :
+L’option `--fix` de markdownlint ne corrige qu’une partie des règles. Ce script Python automatise notamment la correction des problèmes suivants :
 
-- MD026 : ponctuation finale dans les titres (ex. « # Titre. » devient « # Titre »).
-- MD032 : lignes vides manquantes autour des listes.
-- MD034 : URLs nues, encapsulées entre chevrons.
+- MD026 : suppression de la ponctuation finale dans les titres, par exemple `# Titre.` devient `# Titre`.
+- MD032 : ajout des lignes vides nécessaires autour des listes.
+- MD034 : encapsulation des URL nues entre chevrons, par exemple `https://example.com` devient `<https://example.com>`.
+
+Ces règles correspondent aux contrôles documentés par markdownlint pour la ponctuation des titres, l’espacement autour des listes et les URL nues [web:1][web:2].
 
 ### Prérequis
 
-Python 3.6 ou plus récent (bibliothèque standard uniquement, rien à installer).
+- Python 3.6 ou version ultérieure.
+- Aucune dépendance externe.
+- La bibliothèque standard Python suffit.
 
 ### Utilisation
 
-Depuis la racine du dépôt, corriger un dossier entier (ex. une skill fraîchement clonée) :
+Les commandes suivantes doivent être exécutées depuis la racine du dépôt.
 
-    python3 scripts/fix_markdownlint.py skills/ma-nouvelle-skill/
+Pour corriger un dossier entier :
 
-Corriger un fichier unique :
+    python3 scripts/fix_markdownlint.py docs/
 
-    python3 scripts/fix_markdownlint.py skills/ma-skill/README.md
+Pour corriger un fichier unique :
 
-Corriger tout le dépôt :
+    python3 scripts/fix_markdownlint.py README.md
+
+Pour corriger tous les fichiers Markdown du dépôt :
 
     python3 scripts/fix_markdownlint.py .
 
-### Workflow type après import d'une skill
+### Workflow recommandé
 
-1. Cloner la skill dans skills/ puis supprimer son .git imbriqué.
-2. Lancer le script : python3 scripts/fix_markdownlint.py skills/nouvelle-skill/
-3. Vérifier : npx -y markdownlint-cli2 "**/*.md"
-4. Commiter et pousser.
+1. Ajouter ou modifier les fichiers Markdown du dépôt.
+2. Exécuter le script sur les fichiers concernés ou sur l’ensemble du dépôt :
+
+       python3 scripts/fix_markdownlint.py .
+
+3. Vérifier les fichiers Markdown avec markdownlint :
+
+       npx -y markdownlint-cli2 "**/*.md"
+
+4. Examiner les modifications produites.
+5. Commiter les changements.
+6. Pousser la branche vers le dépôt distant.
+
+Le contrôle final avec markdownlint reste nécessaire, car le script ne corrige qu’un sous-ensemble des règles de formatage.
