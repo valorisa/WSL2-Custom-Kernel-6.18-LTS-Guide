@@ -1,6 +1,6 @@
 # Scripts de maintenance du dépôt
 
-Ce dossier contient un utilitaire destiné à maintenir la qualité de la documentation Markdown d’un dépôt GitHub.
+Ce dossier contient un utilitaire destiné à maintenir la qualité de la documentation Markdown d’un dépôt GitHub + un utilitaire de générateur de digest. 
 
 ## `fix_markdownlint.py`
 
