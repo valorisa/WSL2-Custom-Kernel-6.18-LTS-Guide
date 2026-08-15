@@ -64,7 +64,8 @@ def fix_md034(line):
 
 def _is_empty_line_in_list(lines, i, n, mask):
     """Check if line i is an empty line within a list item."""
-    if ln.strip() != '' or mask[i]:
+    line = lines[i]
+    if line.strip() != '' or mask[i]:
         return False
     if not (0 < i and i + 1 < n):
         return False
