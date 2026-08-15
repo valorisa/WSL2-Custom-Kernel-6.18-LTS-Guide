@@ -3,7 +3,7 @@
 [![Kernel](https://img.shields.io/badge/kernel-6.18.20.3--microsoft--standard--WSL2+-brightgreen.svg)]()
 [![License](https://img.shields.io/badge/license-CC--BY--SA--4.0-blue.svg)]()
 [![PowerShell](https://img.shields.io/badge/PowerShell-7.6+-blue.svg)]()
-[![Ubuntu](https://img.shields.io/badge/Ubuntu-25.10-orange.svg)]()
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-26.04-orange.svg)]()
 
 **Guide COMPLET et RIGOUREUX : Compilation du noyau Linux 6.18 LTS pour WSL2 sous Windows 11 Enterprise (PowerShell 7.6+)**
 
