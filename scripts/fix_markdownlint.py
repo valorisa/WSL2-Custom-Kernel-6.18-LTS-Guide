@@ -62,17 +62,25 @@ def fix_md034(line):
     return ''.join(parts)
 
 
+def _is_empty_line_in_list(lines, i, n, mask):
+    """Check if line i is an empty line within a list item."""
+    if ln.strip() != '' or mask[i]:
+        return False
+    if not (0 < i and i + 1 < n):
+        return False
+    if mask[i-1] or mask[i+1]:
+        return False
+    prev_is_list = LIST_ITEM_RE.match(lines[i-1]) or CONT_RE.match(lines[i-1])
+    next_is_cont = CONT_RE.match(lines[i+1])
+    return prev_is_list and next_is_cont
+
+
 def tighten_lists(lines, mask):
     """Supprime les lignes vides entre une puce et sa continuation indentée."""
     out = []
     n = len(lines)
     for i, ln in enumerate(lines):
-        if (ln.strip() == '' and not mask[i]
-                and 0 < i and i + 1 < n
-                and not mask[i-1] and not mask[i+1]
-                and (LIST_ITEM_RE.match(lines[i-1])
-                     or CONT_RE.match(lines[i-1]))
-                and CONT_RE.match(lines[i+1])):
+        if _is_empty_line_in_list(lines, i, n, mask):
             continue
         out.append(ln)
     return out
