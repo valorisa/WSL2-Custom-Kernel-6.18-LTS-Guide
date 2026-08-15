@@ -6,6 +6,7 @@ Fixes cp1252 codec errors on Windows.
 import os
 import sys
 
+
 def generate_digest(root_dir, output_file):
     """Walk directory tree and write all file contents to digest."""
 
@@ -16,7 +17,9 @@ def generate_digest(root_dir, output_file):
         # Arborescence
         for dirpath, dirnames, filenames in os.walk(root_dir):
             # Ignorer .git et __pycache__
-            dirnames[:] = [d for d in dirnames if d not in ['.git', '__pycache__', 'node_modules']]
+            dirnames[:] = [d for d in dirnames
+                           if d not in ['.git', '__pycache__',
+                                        'node_modules']]
 
             level = dirpath.replace(root_dir, '').count(os.sep)
             indent = '│   ' * level
@@ -44,6 +47,7 @@ def generate_digest(root_dir, output_file):
                     out.write(f'[ERROR] {e}\n')
 
     print(f'[OK] Digest generated: {output_file}')
+
 
 if __name__ == '__main__':
     # Arguments : directory et output file
